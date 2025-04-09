@@ -2,7 +2,7 @@
 
 ## Yabai Keybindings (Skhd)
 
-### Switch between Spaces
+#### Switch between Spaces
 
 ```
 cmd - 0x21 : yabai -m space --focus prev 
