@@ -6,6 +6,7 @@ local discipline = require("derhachov.discipline")
 
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
+-- Switch between Panes in normal mode
 
 keymap.set("i", "jk", "<ESC>")
 keymap.set("i", "kj", "<ESC>")
@@ -44,3 +45,12 @@ keymap.set(
   ":lua require('telescope').extensions.git_worktree.create_git_worktree()<CR>",
   { desc = "Toggle git worktree" }
 )
+
+-- Git Signs
+keymap.set("n", "<leader>gs", "<CMD>Telescope git_status<CR>", { desc = "Git status" })
+keymap.set("n", "<leader>gc", "<CMD>Telescope git_commits<CR>", { desc = "Git commits" })
+keymap.set("n", "<leader>]", "<CMD>Gitsigns next_hunk<CR>", { desc = "Next git hunk" })
+keymap.set("n", "<leader>[", "<CMD>Gitsigns prev_hunk<CR>", { desc = "Next git hunk" })
+keymap.set("n", "<leader>gP", "<CMD>Gitsigns preview_hunk<CR>", { desc = "Preview git hunk" })
+keymap.set("n", "<leader>ga", "<CMD>Gitsigns stage_hunk<CR>", { desc = "Stage git hunk" })
+keymap.set("v", "<leader>ga", "<CMD>Gitsigns stage_hunk<CR>", { desc = "Stage git hunk" })

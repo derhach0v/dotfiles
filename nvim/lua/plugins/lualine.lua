@@ -3,6 +3,14 @@ return {
   dependencies = { "nvim-tree/nvim-web-devicons" },
   config = function()
     local lualine = require("lualine")
+    local breadcrumb = function()
+      local breadcrumb_status_ok, breadcrumb = pcall(require, "breadcrumb")
+      if not breadcrumb_status_ok then
+        return
+      end
+      return breadcrumb.get_breadcrumb()
+    end
+
     lualine.setup({
       options = {
         icons_enabled = true,
@@ -26,7 +34,7 @@ return {
         lualine_a = { "mode" },
         lualine_b = { "branch", "diff", "diagnostics" },
         lualine_c = { "filename", { "require'sf'.get_target_org()" } },
-        lualine_x = { "encoding", "fileformat", "filetype" },
+        lualine_x = { "encoding", "fileformat", "filetype", breadcrumb },
         lualine_y = { "progress" },
         lualine_z = { "location" },
       },

@@ -9,6 +9,13 @@ return {
         },
         opts = { skip = true },
       })
+      table.insert(opts.routes, {
+        filter = {
+          event = "notify",
+          find = "sf.nvim",
+        },
+        opts = { skip = true },
+      })
       opts.presets.lsp_doc_border = true
     end,
   },
@@ -37,10 +44,23 @@ return {
     lazy = true,
     opts = {
       style = "moon",
-      transparent = true,
+      transparent = false,
       styles = {
         sidebars = "transparent",
         floats = "transparent",
+      },
+    },
+  },
+  {
+    "echasnovski/mini.icons",
+    opts = {
+      filetype = {
+        cls = { glyph = "󰢎 ", hl = "MiniIconsBlue" },
+        cmp = { glyph = " ", hl = "MiniIconsRed" },
+        page = { glyph = " ", hl = "MiniIconsRed" },
+        design = { glyph = " ", hl = "MiniIconsRed" },
+        trigger = { glyph = "󰢎 ", hl = "MiniIconsBlue" },
+        apex = { glyph = "󰢎 ", hl = "MiniIconsBlue" },
       },
     },
   },

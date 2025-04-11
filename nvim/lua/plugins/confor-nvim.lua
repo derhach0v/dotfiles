@@ -8,18 +8,35 @@ return {
     formatters = {
       prettier = {
         args = function(self, ctx)
-          if
-              vim.endswith(ctx.filename, ".cls")
-              or vim.endswith(ctx.filename, ".trigger" or vim.endswith(ctx.filename, ".apex"))
-          then
+          if vim.endswith(ctx.filename, ".cls") then
             return {
               "--stdin-filepath",
               "$FILENAME",
               "--plugin",
               "prettier-plugin-apex",
+              "--print-width",
+              "300",
+              "--use-tabs",
+              "true",
+              "--tab-width",
+              "4",
+            }
+          elseif vim.endswith(ctx.filename, ".trigger") then
+            return {
+              "--stdin-filepath",
+              "$FILENAME",
+              "--plugin",
+              "prettier-plugin-apex",
+              "--print-width",
+              "300",
+              "--use-tabs",
+              "true",
+              "--tab-width",
+              "4",
             }
           end
-          return { "--stdin-filepath", "$FILENAME", "--plugin", "prettier-plugin-tailwindcss" }
+          -- return { "--stdin-filepath", "$FILENAME", "--plugin", "prettier-plugin-tailwindcss" }
+          return { "--stdin-filepath", "$FILENAME" }
         end,
       },
     },
@@ -43,11 +60,13 @@ return {
       ["apex"] = { "prettier" },
     },
     ext_parsers = {
-      apex = "html",
+      apex = "apex",
     },
-    format = {
-      -- async = true,
-      lsp_fallback = true,
+    default_format_opts = {
+      timeout_ms = 3000,
+      async = false,           -- not recommended to change
+      quiet = false,           -- not recommended to change
+      lsp_format = "fallback", -- not recommended to change
     },
   },
 }
