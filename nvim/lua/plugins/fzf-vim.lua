@@ -1,0 +1,27 @@
+return {
+  -- "junegunn/fzf.vim",
+  -- dependencies = {
+  --   "junegunn/fzf",
+  -- },
+  -- config = function()
+  --   local g = vim.g
+  --
+  --   -- Set FZF options
+  --   g.fzf_layout = { down = "100%" }
+  --   g.fzf_preview_window = { "right:100%", "ctrl-/" }
+  --   g.listproc = "{ list -> fzf#vim#listproc#quickfix(list) }"
+  --   g.fzf_colors = {
+  --     fg = { "fg", "Normal" },
+  --     bg = { "bg", "Normal" },
+  --     hl = { "fg", "Comment" },
+  --     info = { "fg", "Statement" },
+  --     border = { "fg", "Ignore" },
+  --     prompt = { "fg", "Special" },
+  --     pointer = { "fg", "Special" },
+  --     marker = { "fg", "Special" },
+  --     spinner = { "fg", "Special" },
+  --     header = { "fg", "Title" },
+  --   }
+  --   vim.keymap.set("n", "<leader>\\", ":BLines<CR>", { desc = "[Fzf] Find files" })
+  -- end,
+}

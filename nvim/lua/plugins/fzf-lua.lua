@@ -7,7 +7,7 @@ return {
       local fzf = require("fzf-lua")
       local config = fzf.config
       local actions = fzf.actions
-
+      vim.keymap.set("n", "<leader>\\", FzfLua.blines, { desc = "[FZF] BLines" })
       -- Quickfix
       config.defaults.keymap.fzf["ctrl-q"] = "select-all+accept"
       config.defaults.keymap.fzf["ctrl-u"] = "half-page-up"
@@ -71,17 +71,17 @@ return {
         -- Custom LazyVim option to configure vim.ui.select
         ui_select = function(fzf_opts, items)
           return vim.tbl_deep_extend("force", fzf_opts, {
-            prompt = ">>>> ",
+            prompt = " ",
             winopts = {
               title = " " .. vim.trim((fzf_opts.prompt or "Select"):gsub("%s*:%s*$", "")) .. " ",
-              title_pos = "middle",
+              title_pos = "center",
             },
           }, fzf_opts.kind == "codeaction" and {
             winopts = {
               layout = "vertical",
               -- height is number of items minus 15 lines for the preview, with a max of 80% screen height
               height = math.floor(math.min(vim.o.lines * 0.8 - 16, #items + 2) + 0.5) + 16,
-              width = 1,
+              width = 0.5,
               preview = not vim.tbl_isempty(LazyVim.lsp.get_clients({ bufnr = 0, name = "vtsls" })) and {
                 layout = "vertical",
                 vertical = "down:15,border-top",
@@ -105,22 +105,42 @@ return {
           row = 0.5,
           col = 0.5,
           preview = {
-            -- scrollchars = { "┃", "" },
+            scrollchars = { "┃", "" },
             default = "bat",
             number = false,
-            scrollchars = { "", "" },
+            -- scrollchars = { "", "" },
             layout = "horizontal",
             title = "Preview",
           },
         },
         files = {
           cwd_prompt = false,
-          prompt = "Files ",
+          prompt = "Files1 ",
           hidden = true,
           previewer = "bat",
           actions = {
             ["ctrl-i"] = { actions.toggle_ignore },
             ["ctrl-h"] = { actions.toggle_hidden },
+          },
+        },
+        blines = {
+          prompt = "Lines❯ ",
+          file_icons = true,
+          show_bufname = false,                                                            -- display buffer name
+          show_unloaded = false,                                                           -- show unloaded buffers
+          show_unlisted = false,                                                           -- exclude 'help' buffers
+          no_term_buffers = false,                                                         -- exclude 'term' buffers
+          sort_lastused = true,                                                            -- sort by most recent
+          winopts = { treesitter = true, fullscreen = true, preview = { hidden = true } }, -- enable TS highlights
+          fzf_opts = {
+            -- do not include bufnr in fuzzy matching
+            -- tiebreak by line no.
+            ["--multi"] = false,
+            ["--delimiter"] = "[\t]",
+            ["--tabstop"] = "1",
+            ["--tiebreak"] = "index",
+            ["--with-nth"] = "2..",
+            ["--nth"] = "4..",
           },
         },
         grep = {

@@ -63,6 +63,13 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
   end,
 })
 
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+  pattern = { "*.log" },
+  callback = function()
+    vim.cmd("set filetype=sflog")
+  end,
+})
+
 vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#545c7e", bold = true })
 vim.api.nvim_set_hl(0, "LineNr", { fg = "#c8d3f5", bold = true })
 vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#545c7e", bold = true })

@@ -71,13 +71,24 @@ return {
 
       lspconfig.apex_ls.setup({
         -- apex_jar_path = apex_jar_path,
-        cmd = { "apex_language_server" },
+        cmd = {
+          "java",
+          "-jar",
+          "/Users/denysderhachov/.config/nvim/lspserver/apex-jorje-lsp.jar",
+          "apex_language_server",
+        },
         on_attach = on_attach,
         capabilities = capabilities,
-        apex_enable_semantic_errors = true,
-        apex_enable_completion_statistics = true,
-        filetypes = { "apex" },
+        apex_enable_semantic_errors = false,
+        apex_enable_completion_statistics = false,
+        filetypes = { "apex", "apexcode" },
       })
+      -- lspconfig.apexlsp.setup({
+      --   cmd = { "/usr/bin/java" },
+      --   on_attach = on_attach,
+      --   capabilities = capabilities,
+      --   filetypes = { "apex", "apexcode" },
+      -- })
 
       lspconfig.markdown_oxide.setup({
         on_attach = on_attach,
